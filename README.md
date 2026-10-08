@@ -5,6 +5,8 @@ base objective into a small HR dashboard.
 
 ![App demo](docs/demo.gif)
 
+> 📺 **[Watch the full-resolution demo (1000px, ~20 MB GIF)](https://raw.githubusercontent.com/24pardikara/employee-management-system/main/docs/demo-hd.gif)**
+
 - **Frontend:** HTML, CSS, vanilla JavaScript (with Node.js tooling for a dev server)
 - **Backend:** Python Flask REST API (app-factory pattern)
 - **Database:** SQLite
