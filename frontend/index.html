@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="logo" aria-label="Company logo" role="img">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <!-- Generic / anonymous company office-building mark -->
+            <rect x="4.5" y="3" width="15" height="18" rx="1.4" fill="#fdf6ea"/>
+            <g fill="#c05e3c">
+              <rect x="6.6" y="5.4" width="2.4" height="2.4" rx="0.4"/>
+              <rect x="10.8" y="5.4" width="2.4" height="2.4" rx="0.4"/>
+              <rect x="15" y="5.4" width="2.4" height="2.4" rx="0.4"/>
+              <rect x="6.6" y="9.1" width="2.4" height="2.4" rx="0.4"/>
+              <rect x="10.8" y="9.1" width="2.4" height="2.4" rx="0.4"/>
+              <rect x="15" y="9.1" width="2.4" height="2.4" rx="0.4"/>
+              <rect x="6.6" y="12.8" width="2.4" height="2.4" rx="0.4"/>
+              <rect x="15" y="12.8" width="2.4" height="2.4" rx="0.4"/>
+              <rect x="10.4" y="15.4" width="3.2" height="5.6" rx="0.5"/>
+            </g>
+          </svg>
+        </span>
+        <div>
+          <h1>Employee Management System</h1>
+          <p class="subtitle">Full-stack CRUD &middot; HTML / CSS / JS &middot; Flask &middot; SQLite</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Dashboard -->
+    <section class="stats" id="stats">
+      <div class="stat-card">
+        <span class="stat-label">Total Employees</span>
+        <span class="stat-value" id="stat-total">—</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Active</span>
+        <span class="stat-value" id="stat-active">—</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Departments</span>
+        <span class="stat-value" id="stat-depts">—</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Total Payroll</span>
+        <span class="stat-value" id="stat-payroll">—</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Avg Salary</span>
+        <span class="stat-value" id="stat-avg">—</span>
+      </div>
+    </section>
+
+    <!-- Department breakdown -->
+    <section class="card breakdown-card">
+      <h2>Headcount by department</h2>
+      <div id="breakdown" class="breakdown"></div>
+    </section>
+
+    <!-- Add / Edit form -->
+    <section class="card form-card">
+      <h2 id="form-title">Add Employee</h2>
+      <form id="employee-form" novalidate>
+        <div class="grid">
+          <div class="field">
+            <label for="emp_id">Employee ID *</label>
+            <input type="text" id="emp_id" name="emp_id" placeholder="E1007" required />
+          </div>
+          <div class="field">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" placeholder="Full name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="name@acme.com" required />
+          </div>
+          <div class="field">
+            <label for="department">Department *</label>
+            <input type="text" id="department" name="department" placeholder="Engineering"
+                   list="dept-list" required />
+            <datalist id="dept-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="designation">Designation *</label>
+            <input type="text" id="designation" name="designation" placeholder="Developer" required />
+          </div>
+          <div class="field">
+            <label for="salary">Salary *</label>
+            <input type="number" id="salary" name="salary" placeholder="750000" min="0" step="0.01" required />
+          </div>
+          <div class="field">
+            <label for="contact">Contact *</label>
+            <input type="text" id="contact" name="contact" placeholder="9876500000" required />
+          </div>
+          <div class="field">
+            <label for="status">Status *</label>
+            <select id="status" name="status">
+              <option value="Active">Active</option>
+              <option value="On Leave">On Leave</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="date_joined">Date Joined</label>
+            <input type="date" id="date_joined" name="date_joined" />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="submit-btn" class="btn btn-primary">Add Employee</button>
+          <button type="button" id="cancel-btn" class="btn btn-ghost hidden">Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Search + list -->
+    <section class="card">
+      <div class="toolbar">
+        <h2>Employees</h2>
+        <div class="controls">
+          <select id="search-field" aria-label="Search field">
+            <option value="all">All fields</option>
+            <option value="id">Employee ID</option>
+            <option value="name">Name</option>
+            <option value="department">Department</option>
+          </select>
+          <input type="text" id="search-input" placeholder="Search&hellip;" />
+          <select id="status-filter" aria-label="Filter by status">
+            <option value="">All statuses</option>
+            <option value="Active">Active</option>
+            <option value="On Leave">On Leave</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+          <select id="dept-filter" aria-label="Filter by department">
+            <option value="">All departments</option>
+          </select>
+          <button id="clear-filters" class="btn btn-ghost">Clear</button>
+          <button id="export-btn" class="btn btn-accent">⬇ Export CSV</button>
+        </div>
+      </div>
+
+      <div id="status-msg" class="status" aria-live="polite"></div>
+
+      <div class="table-wrap">
+        <table id="employee-table">
+          <thead>
+            <tr>
+              <th data-sort="emp_id">Emp ID <span class="arrow"></span></th>
+              <th data-sort="name">Name <span class="arrow"></span></th>
+              <th data-sort="department">Department <span class="arrow"></span></th>
+              <th data-sort="designation">Designation <span class="arrow"></span></th>
+              <th data-sort="salary" class="num">Salary <span class="arrow"></span></th>
+              <th>Contact</th>
+              <th data-sort="status">Status <span class="arrow"></span></th>
+              <th data-sort="date_joined">Joined <span class="arrow"></span></th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="employee-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">Employee Management System · built with Flask + SQLite</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

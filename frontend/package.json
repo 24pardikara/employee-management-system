@@ -1,0 +1,13 @@
+{
+  "name": "ems-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for the Employee Management System (HTML/CSS/JS). Node tooling for a dev server.",
+  "private": true,
+  "scripts": {
+    "dev": "live-server --port=3000 --no-browser",
+    "start": "live-server --port=3000"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

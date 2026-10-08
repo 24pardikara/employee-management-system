@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# SQLite database (created on first run)
+employees.db
+*.sqlite3
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Packaging
+EmployeeManagementSystem.zip
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
