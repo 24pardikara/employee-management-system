@@ -3,10 +3,12 @@
 A full-stack CRUD web app for managing employee records, extended well beyond the
 base objective into a small HR dashboard.
 
+![App demo](docs/demo.gif)
+
 - **Frontend:** HTML, CSS, vanilla JavaScript (with Node.js tooling for a dev server)
 - **Backend:** Python Flask REST API (app-factory pattern)
 - **Database:** SQLite
-- **Tests:** pytest (27 API tests)
+- **Tests:** pytest (30 API tests)
 
 ## Features
 
